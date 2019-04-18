@@ -26,6 +26,7 @@ function check() {
     switch (curLoc) {
         case 'index.html':
             indexAjax();
+            break;
         case 'articles.html':
             userAjax();
     }
@@ -48,6 +49,7 @@ function indexAjax() {
                 var test = 'articles.html';
 
                 a.setAttribute('href', "file:///C:/xampp/htdocs/cs1792-final-project/" + test + "?" + param + "=" + user.id);
+                a.setAttribute('tabindex', 1);
                 div.setAttribute('class', "user");
                 h1.innerHTML = user.name;
 
