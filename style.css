@@ -1,8 +1,12 @@
-html, body {
-    height: 100%;
-    width: 100%;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html + body {
+    height: 100%;
+    width: 100%;
 }
 
 .header, .breadcrumb {
@@ -31,8 +35,6 @@ html, body {
 
 .breadcrumb ol {
     list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 .landing {
@@ -46,11 +48,37 @@ html, body {
     padding: 0 40px;
 }
 
-.landing > h1, p {
-    margin: 0;
-    padding: 0;
+.users-container {
+    height: 100%;
+    width: 100%;    
+    padding-bottom: 2rem;
+}
+
+.users-container h1 {
+    padding: 2rem 0;
+    text-align: center;
 }
 
 .users { 
+    height: 100%;
+    width: 100%;
     display: grid;
+    grid-template-columns: repeat(5, 180px);
+    grid-auto-flow: row;
+    align-content: center;
+    grid-gap: 60px;
+    justify-content: space-evenly;  
+}
+
+.users a {
+    height: 250px;
+    width: 100%;
+}
+
+.user {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    color: white;
+    word-wrap: break-word;
 }
