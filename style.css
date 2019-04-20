@@ -22,11 +22,6 @@ html + body {
     background-color: white;
 }
 
-.main {
-    height: 100%;
-    width: 100%;
-    background-color: gray;
-}
 
 .breadcrumb {
     background-color: black;
@@ -40,7 +35,7 @@ html + body {
 }
 
 .breadcrumb li::before {
-    content: ' / ';
+    content: '|';
     padding: 0 1rem;
 }
 
@@ -48,6 +43,14 @@ html + body {
     content: '';
     padding: 0;
 }
+
+.main {
+    height: 100%;
+    width: 100%;
+    /* background-color: gray; */
+    
+}
+
 
 .landing {
     height: 84vh;
@@ -60,18 +63,18 @@ html + body {
     padding: 0 40px;
 }
 
-.users-container {
+#index .users-container {
     height: 100%;
     width: 100%;    
     padding: 2rem 0;
 }
 
-.users-container h1 {
+#index .users-container h1 {
     padding-bottom: 2rem;
     text-align: center;
 }
 
-.users { 
+#index .users { 
     height: 100%;
     width: 100%;
     display: grid;
@@ -82,15 +85,38 @@ html + body {
     justify-content: space-evenly;  
 }
 
-.users a {
+#index .users a {
     height: 250px;
     width: 100%;
 }
 
-.user {
+#index .user {
     height: 100%;
     width: 100%;
     background-color: black;
     color: white;
     word-wrap: break-word;
 }
+
+.article-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.article-list-item {
+    height: 200px;
+    width: 800px;
+    background-color: white;
+    display: grid;
+    border: 1px solid black;
+}
+
+/* .article-list {
+    height: 100px;
+    width: 100%;
+    background-color: black;
+} */

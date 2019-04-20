@@ -1,13 +1,10 @@
 console.log('the js is connected.');
-init();
 
-function init(){
-    // OBTAIN USERS
-    var body = document.querySelector('body');
-    body.addEventListener('onload', check());
-    var userId = "";
-    var postId = "";
-}
+// OBTAIN USERS
+var body = document.querySelector('body');
+body.addEventListener('onload', check());
+var userId = "";
+var postId = "";
 
 function ajax(url, method, cb, data){
     let request = new XMLHttpRequest();
@@ -86,14 +83,28 @@ function userAjax(userId) {
 
     breadcrumbbuilder();
     
+    // Build page
+    var articleList = document.createElement('div');
+    var h1 = document.createElement('h1');
+    var main = document.querySelector('div.main');
+
+    // h1.innerHTML = 'Hello';
+    // articleList.setAttribute('class', 'article-list');
+    // main.appendChild(articleList);
+
+
     // AJAX
     ajax('https://jsonplaceholder.typicode.com/posts?userId=' + userId,
         'GET',
         function cb(evt){
             if (evt.target.status === 200) {
                 var posts = JSON.parse(evt.target.response);
+                console.log(posts);
                 posts.forEach(function(post){
-                    
+                    // var div = document.createElement('div');
+                    // div.setAttribute('class', 'article');
+                    // div.innerHTML = post.id;
+                    // body.appendChild(div);
                 })
             }
         })
