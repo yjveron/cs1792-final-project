@@ -1,4 +1,13 @@
 console.log('the js is connected.');
+init();
+
+function init(){
+    // OBTAIN USERS
+    var body = document.querySelector('body');
+    body.addEventListener('onload', check());
+    var userId = "";
+    var postId = "";
+}
 
 function ajax(url, method, cb, data){
     let request = new XMLHttpRequest();
@@ -15,10 +24,6 @@ function ajax(url, method, cb, data){
     }
 }
 
-// OBTAIN USERS
-var body = document.querySelector('body');
-body.addEventListener('onload', check())
-
 function check() {
     // https://stackoverflow.com/questions/4758103/last-segment-of-url
     var curLoc = (location.pathname.substr(location.pathname.lastIndexOf('/')+1));
@@ -28,7 +33,12 @@ function check() {
             indexAjax();
             break;
         case 'articles.html':
-            userAjax();
+            if (hasPost()){
+                postAjax(userId, postId);
+            }
+            else {
+                userAjax(userId);
+            }
     }
 }
 
@@ -61,46 +71,66 @@ function indexAjax() {
     })
 }
 
-function userAjax() {
-    var url = window.location.href;
-    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-    var userId = queryString.substring(2,3);
-
-    // ONLY WORKS IF AN ARTICLE PAGE HAS BEEN CLICKED.
-    // QUERY STRING IS FOR CHECKING IF ARTICLE PAGE EXISTS
-    var queryString2 = url ? url.split('&')[1] : window.location.search.slice(1);
-    if (queryString2){
-        console.log("exists");
-        var postId = Number(queryString2.substring(2,5));
-        console.log(postId);
-
-        // FOLLOWING CODE BELOW RETURNS THE TITLE OF THE POST
-        postAjax(userId, postId);
+function userAjax(userId) {
+    // Build breadcrumb
+    function breadcrumbbuilder() {
+        var breadcrumb = document.querySelector('ol.breadcrumblist');
+        var li = document.createElement('li');
+        var span = document.createElement('span');
+        span.setAttribute('aria-current', 'page');
+        span.innerHTML="User"
+    
+        breadcrumb.appendChild(li);
+        li.appendChild(span);
     }
-    else {
-        console.log("does not exist");
-    }
-}
 
-function postAjax(userId, postId){
+    breadcrumbbuilder();
+    
+    // AJAX
     ajax('https://jsonplaceholder.typicode.com/posts?userId=' + userId,
         'GET',
         function cb(evt){
             if (evt.target.status === 200) {
                 var posts = JSON.parse(evt.target.response);
                 posts.forEach(function(post){
-                    if (post.id === postId) {
-                        var body = document.querySelector('body');
-                        var p = document.createElement('p');
-                        p.innerHTML = post.title;
-                        body.appendChild(p);
-                    }
+                    
                 })
             }
-        }) 
+        })
 }
 
-// get location
-      // if location = index, do ajax on users
-      // else if location = users, do ajax on articles
-      // else if location = article, do ajax on article post
+function postAjax(userId, postId){
+    // ajax('https://jsonplaceholder.typicode.com/posts?userId=' + userId,
+    //     'GET',
+    //     function cb(evt){
+    //         if (evt.target.status === 200) {
+    //             var posts = JSON.parse(evt.target.response);
+    //             posts.forEach(function(post){
+    //                 if (post.id === postId) {
+    //                     var body = document.querySelector('body');
+    //                     var p = document.createElement('p');
+    //                     p.innerHTML = post.title;
+    //                     body.appendChild(p);
+    //                 }
+    //             })
+    //         }
+    //     }) 
+    console.log(userId + " " + postId);
+}
+
+function hasPost() {
+    // Obtain user id
+    var url = window.location.href;
+    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+    userId = queryString.substring(2,3);
+
+    // Check if post is present
+    var queryString2 = url ? url.split('&')[1] : window.location.search.slice(1);
+    if (queryString2) {
+        postId = queryString2.substring(2,5);
+        return true;
+    }
+    else {
+        return false;
+    }
+}

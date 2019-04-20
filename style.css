@@ -35,6 +35,18 @@ html + body {
 
 .breadcrumb ol {
     list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.breadcrumb li::before {
+    content: ' / ';
+    padding: 0 1rem;
+}
+
+.breadcrumb li:first-child::before{
+    content: '';
+    padding: 0;
 }
 
 .landing {
