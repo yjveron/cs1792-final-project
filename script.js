@@ -50,7 +50,7 @@ function indexAjax() {
             users.forEach(function(user) {
                 var a = document.createElement('a');
                 var div = document.createElement('div');
-                var h1 = document.createElement('h1');
+                var h3 = document.createElement('h3');
 
                 var param = encodeURIComponent('u');
                 var test = 'articles.html';
@@ -58,11 +58,11 @@ function indexAjax() {
                 a.setAttribute('href', "file:///C:/xampp/htdocs/cs1792-final-project/" + test + "?" + param + "=" + user.id);
                 a.setAttribute('tabindex', 1);
                 div.setAttribute('class', "user");
-                h1.innerHTML = user.name;
+                h3.innerHTML = user.name;
 
                 parentdiv.appendChild(a);
                 a.appendChild(div);
-                div.appendChild(h1);
+                div.appendChild(h3);
             })
         }
     })
