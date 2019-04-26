@@ -21,17 +21,18 @@ html + body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 40px;
+    justify-content: center;
 }
 
 .header {
     background-color: white;
+    /* padding-left: 40px; */
 }
 
 
 .breadcrumb {
     background-color: white;
-    color: white;
+    color: black;
 }
 
 .breadcrumb ol {
@@ -76,6 +77,7 @@ html + body {
     height: 100%;
     width: 100%;    
     padding: 3rem 0;
+    background-color:whitesmoke;
 }
 
 #index .users-container h1 {
@@ -104,31 +106,73 @@ html + body {
     height: 100%;
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    color: black;
+    /* color: black; */
     word-wrap: break-word;
     border-radius: 10px;
-    transition: 1s linear;
-}
-
-.article-list {
+    transition: 0.15s linear;
+    /* background-color:#E5E5E5; */
+    background-color: navy;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    font-weight: thin;
+}
+
+#index .user::before{
+    content: '';
+    height: 180px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    /* background: linear-gradient(45deg, #3b98a1 0%,#61bdc5 36%,#beeff3 93%); */
+    background-color: white;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+#index .user:hover {
+    transform:translateY(-10px);
+}
+
+#articles .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(5, 200px);
+    grid-auto-flow: row;
     padding: 0;
     margin: 0;
+    align-items: center;
+    grid-gap: 1rem;
+    justify-content: center;
     width: 100%;
 }
 
 .article-list-item {
     height: 200px;
-    width: 800px;
+    width: 200px;
     background-color: white;
-    display: grid;
     border: 1px solid black;
+    border-radius: 10px;
 }
 
-/* .article-list {
-    height: 100px;
-    width: 100%;
-    background-color: black;
-} */
+.article-list a {
+    text-decoration: none;
+    height: 200px;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.article-single {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1rem 0;
+    width: 300px;
+    padding: 1rem;
+}

@@ -84,13 +84,16 @@ function userAjax(userId) {
     breadcrumbbuilder();
     
     // Build page
-    var articleList = document.createElement('div');
     var h1 = document.createElement('h1');
     var main = document.querySelector('div.main');
+    var gridcontainer = document.createElement('div');
 
-    // h1.innerHTML = 'Hello';
-    // articleList.setAttribute('class', 'article-list');
-    // main.appendChild(articleList);
+    h1.innerHTML = 'Posts';
+    main.setAttribute('class', 'main');
+    gridcontainer.setAttribute('class', 'article-list');
+    main.appendChild(h1);
+    main.appendChild(gridcontainer);
+
 
 
     // AJAX
@@ -101,32 +104,84 @@ function userAjax(userId) {
                 var posts = JSON.parse(evt.target.response);
                 console.log(posts);
                 posts.forEach(function(post){
-                    // var div = document.createElement('div');
-                    // div.setAttribute('class', 'article');
-                    // div.innerHTML = post.id;
-                    // body.appendChild(div);
+                    var a = document.createElement('a');
+                    var div = document.createElement('div');
+                    a.setAttribute('href', "file:///C:/xampp/htdocs/cs1792-final-project/articles.html?u=" + userId + "&p=" + post.id);
+                    div.setAttribute('class', 'article-list-item');
+                    a.setAttribute('tabindex', 1);
+                    div.innerHTML = "Title: " + post.title;
+                    gridcontainer.appendChild(a);
+                    a.appendChild(div);
                 })
             }
         })
+
+    var back = document.createElement('a');
+    back.setAttribute('href', 'file:///C:/xampp/htdocs/cs1792-final-project/index.html');
+    back.setAttribute('tabindex', 1);
+    back.innerHTML = "BACK";
+    main.appendChild(back);
 }
 
 function postAjax(userId, postId){
-    // ajax('https://jsonplaceholder.typicode.com/posts?userId=' + userId,
-    //     'GET',
-    //     function cb(evt){
-    //         if (evt.target.status === 200) {
-    //             var posts = JSON.parse(evt.target.response);
-    //             posts.forEach(function(post){
-    //                 if (post.id === postId) {
-    //                     var body = document.querySelector('body');
-    //                     var p = document.createElement('p');
-    //                     p.innerHTML = post.title;
-    //                     body.appendChild(p);
-    //                 }
-    //             })
-    //         }
-    //     }) 
-    console.log(userId + " " + postId);
+    // Build breadcrumb
+    function breadcrumbbuilder() {
+        var breadcrumb = document.querySelector('ol.breadcrumblist');
+        var prev = document.createElement('li');
+        var a = document.createElement('a');
+        a.setAttribute('href', 'file:///C:/xampp/htdocs/cs1792-final-project/articles.html?u=' + userId);
+        a.setAttribute('tabindex', '1');
+        a.innerHTML="User"
+
+        breadcrumb.appendChild(prev);
+        prev.appendChild(a);
+
+
+        var current = document.createElement('li');
+        var span = document.createElement('span');
+        span.setAttribute('aria-current', 'page');
+        span.innerHTML="Post";
+        breadcrumb.appendChild(current);
+        current.appendChild(span);
+
+    }
+
+    breadcrumbbuilder();
+
+    var h1 = document.createElement('h1');
+    var main = document.querySelector('div.main');
+
+    h1.innerHTML = "POST";
+    main.appendChild(h1);
+
+    ajax('https://jsonplaceholder.typicode.com/posts?userId=' + userId,
+        'GET',
+        function cb(evt){
+            if (evt.target.status === 200) {
+                var posts = JSON.parse(evt.target.response);
+                posts.forEach(function(post){
+                    if (post.id === Number(postId)) {
+                        var container = document.createElement('div');
+                        var title = document.createElement('h3');
+                        var postp = document.createElement('p');
+
+                        container.setAttribute('class', 'article-single');
+                        title.innerHTML = post.title;
+                        postp.innerHTML = post.body;
+
+                        main.appendChild(container);
+                        container.appendChild(title);
+                        container.appendChild(postp);
+                    }
+                })
+            }
+
+            var back = document.createElement('a');
+            back.setAttribute('href', 'file:///C:/xampp/htdocs/cs1792-final-project/articles.html?u=' + userId);
+            back.setAttribute('tabindex', 1);
+            back.innerHTML = "BACK";
+            main.appendChild(back);
+        }) 
 }
 
 function hasPost() {
