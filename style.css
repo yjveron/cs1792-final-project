@@ -131,7 +131,8 @@ html + body {
     margin-bottom: 1rem;
 }
 
-#index .user:hover {
+#index .user:hover,
+#articles .article-list-item:hover{
     transform:translateY(-10px);
 }
 
@@ -160,6 +161,7 @@ html + body {
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
+    transition: 0.15s linear;
 }
 
 .article-list a {

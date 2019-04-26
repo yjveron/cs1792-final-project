@@ -70,12 +70,12 @@ function indexAjax() {
 
 function userAjax(userId) {
     // Build breadcrumb
-    function breadcrumbbuilder() {
+    function breadcrumbbuilder(info) {
         var breadcrumb = document.querySelector('ol.breadcrumblist');
         var li = document.createElement('li');
         var span = document.createElement('span');
         span.setAttribute('aria-current', 'page');
-        span.innerHTML="User"
+        span.innerHTML="User";
     
         breadcrumb.appendChild(li);
         li.appendChild(span);
@@ -88,7 +88,7 @@ function userAjax(userId) {
     var main = document.querySelector('div.main');
     var gridcontainer = document.createElement('div');
 
-    h1.innerHTML = 'Posts';
+    h1.innerHTML = 'POSTS';
     main.setAttribute('class', 'main');
     gridcontainer.setAttribute('class', 'article-list');
     main.appendChild(h1);
